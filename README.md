@@ -70,6 +70,14 @@ pnpm i
 pnpm dev
 ```
 
+## Build project
+
+To build the project run:
+```bash
+pnpm build
+```
+Then you can insert the script to your preferred Userscript Manager.
+
 ## Credits
 
 - This project is inspired by [wong2/chat-gpt-google-extension](https://github.com/wong2/chat-gpt-google-extension).
