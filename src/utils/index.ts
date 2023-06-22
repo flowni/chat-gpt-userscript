@@ -18,6 +18,8 @@ export function getWebsite() {
       return configRequestImmediately('duckduckgo')
     case 'www.deepl.com':
       return configRequestAfterClickButton('deepl')
+    case 'www.golem.de':
+      return configRequestAfterClickButton('golem')
     default:
       throw new Error(`unknown website: ${location.hostname}`)
   }

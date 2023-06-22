@@ -166,13 +166,26 @@ function getQuestion() {
       const outLang = document.querySelectorAll('strong[data-testid=\'deepl-ui-tooltip-target\']')[0].innerHTML
       return `Translate the following paragraph into ${outLang} and only ${outLang}\n\n${document.getElementById('source-dummydiv').innerHTML}`
     }
+    case 'golem': {
+      const article = document.getElementsByTagName('article')[0];
+      // Remove all <aside> tags within the article (ads)
+      const asideTags = article.getElementsByTagName('aside');
+      for (let i = asideTags.length - 1; i >= 0; i--) {
+        asideTags[i].remove();
+      }
+
+      // console.log(article.innerHTML); //with html would it probably work better as ads can be filtered but didn't work
+      // console.log(article.innerText); //only text
+
+      return `Fasse den folgenden Artikel auf Deutsch zusammen. Die Zusammenfassung sollte nur 3-5 Stichpunkte beinhalten:\n${article.innerText.trim()}`;
+    }
     default:
       return new URL(window.location.href).searchParams.get('q')
   }
 }
 
 onBeforeMount(async () => {
-  if (getWebsite().name === 'deepl') {
+  if (getWebsite().type === 'after-click-button') {
     const button = document.getElementsByClassName('chat-gpt-translate-button')[0]
     button.addEventListener('click', () => {
       cardStatus.value = 'Loading'

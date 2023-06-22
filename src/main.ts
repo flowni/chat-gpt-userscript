@@ -31,6 +31,9 @@ function initUI(container: HTMLDivElement) {
     case 'deepl':
       deeplInjectContainer(container)
       break
+    case 'golem':
+      golemInjectContainer(container);
+      break
     default:
       throw new Error('Unknown Website')
   }
@@ -98,6 +101,19 @@ function initUI(container: HTMLDivElement) {
     catch {
       document.getElementsByClassName('lmt__textarea_container')[1].insertBefore(container, document.getElementsByClassName('lmt__translations_as_text')[0])
     }
+  }
+  function golemInjectContainer(container: HTMLDivElement) {
+    // add button
+    const button = document.createElement('button');
+    button.innerHTML = 'ChatGPT helper';
+    button.className = 'chat-gpt-translate-button';
+    const articleElement = document.getElementsByTagName('article')[0];
+    articleElement.insertBefore(button, articleElement.firstChild);
+    container.style.maxWidth = '1000px';
+
+    // add textbox for summary
+    const ChatGPTCard: Element = document.getElementsByTagName('article')[0];
+    ChatGPTCard.prepend(container);
   }
 }
 
